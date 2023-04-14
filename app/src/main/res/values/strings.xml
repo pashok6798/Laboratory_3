@@ -1,0 +1,5 @@
+<resources>
+    <string name="valueString">Hello World!</string>
+    <string name="app_name">Labaratory 3: the weather</string>
+    <string name="enableGeolocation">Turn on location</string>
+</resources>

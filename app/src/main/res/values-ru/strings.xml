@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Лаб. работа 3: Прогноз погоды</string>
+    <string name="valueString">Привет, мир!</string>
+    <string name="enableGeolocation">Включите геолокацию</string>
+</resources>
