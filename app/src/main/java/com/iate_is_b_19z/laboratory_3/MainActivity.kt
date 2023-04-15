@@ -11,16 +11,25 @@ import android.os.Looper
 import android.widget.TextView
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Geocoder
 import android.provider.Settings
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.*
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.*
+import org.json.JSONObject
+import java.util.Locale
 
 /*fun getWeather() {
 
 }*/
 
+val API_KEY = "db33e9d486294afba84185656231504"
+
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private fun checkPermissions(): Boolean {
         return (checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) && (checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
@@ -37,6 +46,13 @@ class MainActivity : AppCompatActivity() {
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
             PERMISSION_ID
         )
+    }
+
+    private fun getCity(latitude : Double, longitude : Double) : String {
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val address = geocoder.getFromLocation(latitude, longitude, 1)
+
+        return address!![0].adminArea
     }
 
     private val PERMISSION_ID = 42
@@ -93,6 +109,38 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         findViewById<TextView>(R.id.shortTV).text = location.latitude.toString()
                         findViewById<TextView>(R.id.longTV).text = location.longitude.toString()
+
+                        var lat = location.latitude
+                        var lon = location.longitude
+
+                        var lang = "en"
+
+                        if (Locale.getDefault().language == "ru") lang = "ru"
+
+                        val cityName = getCity(lat, lon)
+
+                        if(cityName != null) {
+                            val url =
+                                "http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$cityName&aqi=no&lang=$lang"
+                            val queue = Volley.newRequestQueue(this)
+                            val stringRequest = StringRequest(Request.Method.GET,
+                                url,
+                                { response ->
+                                    val obj = JSONObject(response)
+                                    val curr = obj.getJSONObject("current")
+                                    val loc = obj.getJSONObject("location")
+
+                                    findViewById<TextView>(R.id.shortTV).text =
+                                        curr.getString("temp_c")
+                                    findViewById<TextView>(R.id.longTV).text = loc.getString("name")
+                                },
+                                {
+                                    Toast.makeText(this, "Volley error: $it", Toast.LENGTH_LONG)
+                                })
+                        }
+                        else {
+                            Toast.makeText(this, "Ошибка. Пустой адрес", Toast.LENGTH_SHORT)
+                        }
                     }
                 }
             } else {
