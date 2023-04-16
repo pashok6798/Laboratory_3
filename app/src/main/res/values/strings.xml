@@ -2,4 +2,6 @@
     <string name="valueString">Hello World!</string>
     <string name="app_name">Labaratory 3: the weather</string>
     <string name="enableGeolocation">Turn on location</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
