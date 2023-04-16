@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val geocoder = Geocoder(this, Locale.getDefault())
         val address = geocoder.getFromLocation(latitude, longitude, 1)
 
-        return address!![0].adminArea
+        return address!![0].locality
     }
 
     private val PERMISSION_ID = 42
@@ -107,21 +107,21 @@ class MainActivity : AppCompatActivity() {
                     if (location == null) {
                         requestNewLocationData()
                     } else {
-                        findViewById<TextView>(R.id.shortTV).text = location.latitude.toString()
-                        findViewById<TextView>(R.id.longTV).text = location.longitude.toString()
+                        //findViewById<TextView>(R.id.shortTV).text = location.latitude.toString()
+                        //findViewById<TextView>(R.id.longTV).text = location.longitude.toString()
 
                         var lat = location.latitude
                         var lon = location.longitude
 
-                        var lang = "en"
+                        //var lang = "en"
 
-                        if (Locale.getDefault().language == "ru") lang = "ru"
+                        //if (Locale.getDefault().language == "ru") lang = "ru"
 
                         val cityName = getCity(lat, lon)
 
                         if(cityName != null) {
                             val url =
-                                "http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$cityName&aqi=no&lang=$lang"
+                                "http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$cityName&aqi=no"
                             val queue = Volley.newRequestQueue(this)
                             val stringRequest = StringRequest(Request.Method.GET,
                                 url,
@@ -130,13 +130,19 @@ class MainActivity : AppCompatActivity() {
                                     val curr = obj.getJSONObject("current")
                                     val loc = obj.getJSONObject("location")
 
-                                    findViewById<TextView>(R.id.shortTV).text =
-                                        curr.getString("temp_c")
+                                    findViewById<TextView>(R.id.shortTV).text = "Температура (Цельсий): " + curr.getString("temp_c")
                                     findViewById<TextView>(R.id.longTV).text = loc.getString("name")
+                                    //findViewById<TextView>(R.id.helloWorldTV).text = "Город: " + loc.getString("name") + ", температура (Цельсий): " + curr.getString("temp_c")
                                 },
                                 {
                                     Toast.makeText(this, "Volley error: $it", Toast.LENGTH_LONG)
+                                    findViewById<TextView>(R.id.helloWorldTV).text = "Volley error: $it"
                                 })
+
+                            queue.add(stringRequest)
+                            queue.start()
+
+                            //findViewById<TextView>(R.id.helloWorldTV).text = cityName
                         }
                         else {
                             Toast.makeText(this, "Ошибка. Пустой адрес", Toast.LENGTH_SHORT)
