@@ -3,4 +3,5 @@
     <string name="app_name">Лаб. работа 3: Прогноз погоды</string>
     <string name="valueString">Привет, мир!</string>
     <string name="enableGeolocation">Включите геолокацию</string>
+    <string name="error_message">Ошибка:</string>
 </resources>

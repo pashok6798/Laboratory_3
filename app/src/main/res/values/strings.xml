@@ -4,4 +4,5 @@
     <string name="enableGeolocation">Turn on location</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_message">Error:</string>
 </resources>
