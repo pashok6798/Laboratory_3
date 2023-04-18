@@ -14,9 +14,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().replace(R.id.placeHolder, MainFragment.newInstance()).commit()
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        getLastLocation()
     }
 }
