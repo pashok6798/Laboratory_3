@@ -4,4 +4,11 @@
     <string name="valueString">Привет, мир!</string>
     <string name="enableGeolocation">Включите геолокацию</string>
     <string name="error_message">Ошибка:</string>
+    <string name="closeText">Закрыть</string>
+    <string name="aboutBtn">О программе</string>
+    <string name="temperatureLabel">Отображать темпераутру в::</string>
+    <string name="celciumText">Цельсиях</string>
+    <string name="farenheightText">Фаренгейтах</string>
+    <string name="acceptBtn">Принять</string>
+    <string name="aboutText">Лабораторная работа 3: приложение "прогноз погоды". Разработал Судаков Павел, ИС-Б19з. ИАТЭ НИЯУ МИФИ 2023</string>
 </resources>

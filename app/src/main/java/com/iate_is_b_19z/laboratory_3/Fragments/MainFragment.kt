@@ -1,6 +1,7 @@
 package com.iate_is_b_19z.laboratory_3.Fragments
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -19,6 +21,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.iate_is_b_19z.laboratory_3.API_KEY
+import com.iate_is_b_19z.laboratory_3.AboutActivity
 import com.iate_is_b_19z.laboratory_3.MainViewModel
 import com.iate_is_b_19z.laboratory_3.checkPermissions
 import com.iate_is_b_19z.laboratory_3.databinding.FragmentMainBinding
@@ -37,15 +40,20 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
 
         checkPermission()
-        getLocation()
+        //getLocation()
+    }
 
+    fun onClickGoAbout(view : View) {
+        val intent = Intent(activity as AppCompatActivity, AboutActivity::class.java)
+        startActivity(intent)
     }
 
     /*private fun init() = with(binding) {
@@ -68,7 +76,7 @@ class MainFragment : Fragment() {
 
         fLocationClient.getCurrentLocation(
             LocationRequest.PRIORITY_HIGH_ACCURACY, ct.token).addOnCompleteListener {
-            requestWeatherData("${it.result.latitude},${it.result.longitude}")
+            //requestWeatherData("${it.result.latitude},${it.result.longitude}")
         }
     }
 
@@ -112,11 +120,11 @@ class MainFragment : Fragment() {
             "0:00"
         )
 
-        tvCityName.text = item.city
+        /*tvCityName.text = item.city
         tvDate.text = item.timestamp
         tvCondition.text = item.condition
         tvCurrentTemp.text = item.currentTemp
-        tvMaxMin.text = item.maxTemp + "/" + item.minTemp
+        tvMaxMin.text = item.maxTemp + "/" + item.minTemp*/
     }
 
     private fun checkPermission() {

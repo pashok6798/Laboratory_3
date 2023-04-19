@@ -3,6 +3,12 @@
     <string name="app_name">Labaratory 3: the weather</string>
     <string name="enableGeolocation">Turn on location</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_message">Error:</string>
+    <string name="closeText">Close</string>
+    <string name="aboutBtn">About</string>
+    <string name="temperatureLabel">Show temperature in:</string>
+    <string name="celciumText">Celcium</string>
+    <string name="farenheightText">Farenheight</string>
+    <string name="acceptBtn">Accept</string>
+    <string name="aboutText">Laboratory work 3: the weather app. Developed by Sudakov Pavel, IS-B-19c. OINPE NRNU MEPhI 2023</string>
 </resources>
