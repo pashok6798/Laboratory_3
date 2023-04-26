@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -47,13 +46,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
 
+        aboutBtn.setOnClickListener {
+            val shit = AboutActivity()
+            val intent = Intent(shit, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
         checkPermission()
         //getLocation()
-    }
-
-    fun onClickGoAbout(view : View) {
-        val intent = Intent(activity as AppCompatActivity, AboutActivity::class.java)
-        startActivity(intent)
     }
 
     /*private fun init() = with(binding) {
