@@ -47,8 +47,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         aboutBtn.setOnClickListener {
-            val shit = AboutActivity()
-            val intent = Intent(shit, AboutActivity::class.java)
+            val intent = Intent(AboutActivity(), AboutActivity::class.java)
             startActivity(intent)
         }
 
